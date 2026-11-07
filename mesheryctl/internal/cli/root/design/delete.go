@@ -22,7 +22,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/asaskevich/govalidator"
 	"github.com/meshery/meshery/mesheryctl/internal/cli/root/config"
 	"github.com/meshery/meshery/mesheryctl/pkg/utils"
 	"github.com/meshery/meshery/server/models"
@@ -78,7 +77,7 @@ mesheryctl design delete [file | URL]
 
 		var patternFileByt []byte
 		// If file path not a valid URL, treat it like a local file path
-		if !govalidator.IsURL(file) {
+		if !utils.IsValidUrl(file) {
 			content, err := os.ReadFile(file)
 			if err != nil {
 				return utils.ErrFileRead(fmt.Errorf(errInvalidPathMsg, file))

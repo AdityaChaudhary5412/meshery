@@ -22,7 +22,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/asaskevich/govalidator"
 	"github.com/meshery/meshery/mesheryctl/internal/cli/pkg/api"
 	"github.com/meshery/meshery/mesheryctl/internal/cli/root/config"
 	"github.com/meshery/meshery/mesheryctl/pkg/utils"
@@ -87,7 +86,7 @@ mesheryctl design undeploy -f [filepath]
 
 		deployURL := mctlCfg.GetBaseMesheryURL() + "/api/pattern/deploy"
 
-		if !govalidator.IsURL(file) {
+		if !utils.IsValidUrl(file) {
 			content, err := os.ReadFile(file)
 			if err != nil {
 				return utils.ErrFileRead(err)
